@@ -35,7 +35,8 @@ const app = express();
 
 const campgroundRouter = require('./routes/campgrounds');
 const reviewRouter = require('./routes/reviews');
-const userRouter = require('./routes/user')
+const userRouter = require('./routes/user');
+const router = require('./routes/campgrounds');
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -134,6 +135,10 @@ app.use((req, res, next) => {
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   next();
+})
+
+app.get('/', (req, res)=>{
+  res.render('home')
 })
 
 app.use('/campgrounds', campgroundRouter);
